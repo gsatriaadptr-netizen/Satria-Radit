@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satria and Radit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #F6EFE0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Bagian judul besar di atas dengan warna burgundy dan teks cream kekuningan */
+        .site-header {
+            width: 100%;
+            min-height: 170px;
+            background-color: #5C1A28;
+            padding: 64px 32px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 24px rgba(92, 26, 40, 0.22);
+        }
+
+        .site-header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .site-header h1 {
+            font-size: 2.8rem;
+            color: #F6EFE0;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 48px 32px 60px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 36px;
+            max-width: 1360px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            min-height: 360px;
+            border-radius: 24px;
+            padding: 36px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background BG3.jpg pada bagian orang pertama */
+        .card-pertama {
+            background-image: url('BG3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card-pertama::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 0;
+        }
+
+        .card-pertama > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Background BG2.jpg pada bagian orang kedua */
+        .card-kedua {
+            background-image: url('BG2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card-kedua::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 0;
+        }
+
+        .card-kedua > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-box img {
+            width: 195px;
+            height: 245px;
+            object-fit: cover;
+            border-radius: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            display: block;
+        }
+
+        .bio-box {
+            flex: 1;
+        }
+
+        /* Text box khusus untuk tulisan agar jelas dan tidak kalah dengan background */
+        .text-box {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-box h2 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .text-box p {
+            font-size: 1rem;
+            color: #1e293b;
+            line-height: 1.65;
+            margin-bottom: 0;
+        }
+
+        .audio-control {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(241, 245, 249, 0.96);
+            padding: 10px 18px 10px 12px;
+            border-radius: 44px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background-color: #5C1A28;
+            color: #F6EFE0;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .icon-btn:hover {
+            background-color: #43111c;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.active {
+            background-color: #dc2626;
+            color: #ffffff;
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-info span {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .track-info strong {
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 780px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .site-header {
+                min-height: 130px;
+                padding: 44px 20px;
+            }
+            .site-header h1 {
+                font-size: 2rem;
+            }
+            .main-wrapper {
+                padding: 32px 18px 44px;
+            }
+            .card {
+                flex-direction: column;
+                text-align: center;
+                padding: 26px 20px;
+            }
+            .photo-box img {
+                width: 175px;
+                height: 220px;
+            }
+            .audio-control {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- JUDUL WEB DI ATAS DENGAN BACKGROUND BURGUNDY -->
+    <header class="site-header">
+        <div class="site-header-inner">
+            <h1>Satria and Radit</h1>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+        <div class="container">
+            <!-- ORANG PERTAMA -->
+            <section class="card card-pertama">
+                <div class="photo-box">
+                    <img src="Satria.jpg" alt="Foto Satria">
+                </div>
+
+                <div class="bio-box">
+                    <div class="text-box">
+                        <h2>Satria</h2>
+                        <p>
+                            Halo namaku Gregorius Satria Adiputra. Saya biasa dipanggil Satria. Saya lahir di Yogyakarta, 17 April 2010. Saya saat ini bersekolah di SMA Stella Duce 2 Yogyakarta. Saya memiliki hobi bermain futsal dan mendengarkan musik. Saya memiliki satu band favorit yaitu LANY.
+                        </p>
+                    </div>
+
+                    <div class="audio-control">
+                        <button type="button" class="icon-btn" onclick="putarLagu('lagu1', this)" aria-label="Putar atau Hentikan LANY - Stuck">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <div class="track-info">
+                            <span>Lagu Favorit</span>
+                            <strong>LANY - Stuck</strong>
+                        </div>
+                    </div>
+
+                    <audio id="lagu1" src="LANY-Stuck.mp3" onended="selesaiLagu(this)"></audio>
+                </div>
+            </section>
+
+            <!-- ORANG KEDUA -->
+            <section class="card card-kedua">
+                <div class="photo-box">
+                    <img src="Radit.jpg" alt="Foto Radit">
+                </div>
+
+                <div class="bio-box">
+                    <div class="text-box">
+                        <h2>Radit</h2>
+                        <p>
+                            Halo namaku Radithya Ganendra Wirasena biasa dipanggil Radit. Aku lahir di Tangerang 19 Desember 2009. Saat ini aku bersekolah di SMA Stella Duce 2 Yogyakarta. Hobiku adalah bermain basket, bermain alat musik gitar dan mendengarkan musik.
+                        </p>
+                    </div>
+
+                    <div class="audio-control">
+                        <button type="button" class="icon-btn" onclick="putarLagu('lagu2', this)" aria-label="Putar atau Hentikan Rex Orange County - Pluto Projector">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <div class="track-info">
+                            <span>Lagu Favorit</span>
+                            <strong>Rex Orange County - Pluto Projector</strong>
+                        </div>
+                    </div>
+
+                    <audio id="lagu2" src="Rex Orange County-Pluto Projector.mp3" onended="selesaiLagu(this)"></audio>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function putarLagu(idAudio, tombol) {
+            const audio = document.getElementById(idAudio);
+            const ikon = tombol.querySelector('i');
+
+            if (audio.paused) {
+                document.querySelectorAll('audio').forEach(item => {
+                    item.pause();
+                    item.currentTime = 0;
+                });
+                document.querySelectorAll('.icon-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.querySelector('i').className = 'fa-solid fa-play';
+                });
+
+                audio.play();
+                tombol.classList.add('active');
+                ikon.className = 'fa-solid fa-stop';
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+                tombol.classList.remove('active');
+                ikon.className = 'fa-solid fa-play';
+            }
+        }
+
+        function selesaiLagu(audio) {
+            const kartu = audio.closest('.bio-box');
+            const tombol = kartu.querySelector('.icon-btn');
+            const ikon = tombol.querySelector('i');
+
+            tombol.classList.remove('active');
+            ikon.className = 'fa-solid fa-play';
+        }
+    </script>
+
+</body>
+</html>
